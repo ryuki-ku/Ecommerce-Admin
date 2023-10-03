@@ -8,6 +8,7 @@ import { CellAction } from "./cell-action"
 export type ProductColumn = {
   id: string
   name: string
+  inventory: number
   price: string
   size: string
   category: string
@@ -59,7 +60,10 @@ export const columns: ColumnDef<ProductColumn>[] = [
     accessorKey: "createdAt",
     header: "Date",
   },
-
+  {
+    accessorKey: "inventory",
+    header: "Inventory",
+  },
   {
     id: 'actions',
     cell: ({row}) => <CellAction  data={row.original}/>

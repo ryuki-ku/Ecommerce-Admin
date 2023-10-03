@@ -46,6 +46,7 @@ const formSchema = z.object({
     name: z.string().min(1),
     images: z.object({url: z.string()}).array(),
     price: z.coerce.number().min(1),
+    inventory: z.number().min(1),
     categoryId: z.string().min(1),
     colorId: z.string().min(1),
     sizeId: z.string().min(1),
@@ -92,6 +93,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             name: '',
             images: [],
             price: 0,
+            inventory: 0,
             categoryId: '',
             colorId: '',
             sizeId: '',
@@ -182,6 +184,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                         )}
                     />
                 <div className="grid grid-cols-3 gap-8">
+                    {/* Edit Name */}
                     <FormField 
                         control={form.control}
                         name="name"
@@ -204,6 +207,19 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                 <FormLabel>Price</FormLabel>
                                 <FormControl>
                                     <Input type="number" disabled={loading} placeholder="10.000" {...field}/>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField 
+                        control={form.control}
+                        name="inventory"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Inventory</FormLabel>
+                                <FormControl>
+                                    <Input type="number" disabled={loading} placeholder="0" {...field}/>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

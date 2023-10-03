@@ -44,6 +44,7 @@ export async function PATCH (
             name,
             images,
             price,
+            inventory,
             categoryId,
             colorId,
             sizeId,
@@ -65,6 +66,10 @@ export async function PATCH (
 
         if(!price) {
             return new Response("Price Url is required", {status: 400})
+        }
+
+        if(!inventory) {
+            return new Response("Inventory is required", {status: 400})
         }
 
         if(!categoryId) {
@@ -102,6 +107,7 @@ export async function PATCH (
             data: {
                 name,
                 price,
+                inventory,
                 categoryId,
                 colorId,
                 sizeId,
