@@ -120,9 +120,12 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
             )}
         </div>
         <Separator className="mt-3"/>
-        
+        <div>
+                        
+        </div>
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+                    
                     <FormField 
                         control={form.control}
                         name="imageUrl"

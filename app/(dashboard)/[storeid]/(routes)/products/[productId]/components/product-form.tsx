@@ -17,7 +17,6 @@ import { AlertModal } from "@/components/modals/alert-modal";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
-
 import { Trash } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -85,15 +84,16 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
     const form = useForm<ProductFormvalues>({
         resolver: zodResolver(formSchema),
-         // @ts-ignore  ERROR RALATE TO REACT-HOOK
+        // @ts-ignore  ERROR RALATE TO REACT-HOOK
         defaultValues: initialData ? {
             ...initialData,
             price: parseFloat(String(initialData?.price)),
+            colorId: parseFloat(String(initialData?.colorId))
         } : {
             name: '',
             images: [],
             price: 0,
-            inventory: 0,
+            inventory: 10,
             categoryId: '',
             colorId: '',
             sizeId: '',
@@ -102,7 +102,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         }
     });
     
-//Save billboard
+//Save product
     const onSubmit = async (data: ProductFormvalues) => {
         try {
             setLoading(true);
@@ -121,7 +121,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
         }
     }
 
-//Delete billboard
+//Delete product
     const onDelete = async () => {
         try {
             setLoading(true);
@@ -355,6 +355,37 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                             </FormItem>
                         )}
                     />
+
+            {/* {colors.map((color) => (
+                <FormField
+                  control={form.control}
+                  name="colorId"
+                  render={({ field }) => (
+                      <FormItem
+                        key={color.id}
+                        className="flex flex-row items-start space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(color.id)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, color.id])
+                                : field.onChange(
+                                    field.value?.filter(
+                                      (value) => value !== color.id
+                                    )
+                                  )
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="font-normal">
+                          {color.name}
+                        </FormLabel>
+                      </FormItem>   
+                 )}
+                />
+              ))} */}
                     <FormField 
                         control={form.control}
                         name="isArchived"
@@ -377,6 +408,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                             </FormItem>
                         )}
                     />
+                    
                 </div>
                 <Button disabled={loading} className="ml-auto" typeof="submit">
                         {action}
@@ -386,3 +418,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     </>
     );
 };
+
+
+              
+
+        
+        
