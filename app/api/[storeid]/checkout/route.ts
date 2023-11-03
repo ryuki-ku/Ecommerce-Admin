@@ -63,7 +63,7 @@ export async function POST(
     }
   });
 
-  //handle details payment
+  //handle details require payment
   const session = await stripe.checkout.sessions.create({
     line_items,
     mode: 'payment',
