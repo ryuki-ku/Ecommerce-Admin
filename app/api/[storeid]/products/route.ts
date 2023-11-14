@@ -14,11 +14,12 @@ export async function POST (
         const { 
             name,
             price,
-            inventory,
             categoryId,
             colorId,
             sizeId,
             images,
+            description,
+            starRating,
             isFeatured,
             isArchived,
          } = body;
@@ -31,6 +32,14 @@ export async function POST (
             return new Response("Name is required", {status: 400})
         }
 
+        if(!description) {
+            return new Response("Description is required", {status: 400})
+        }
+
+        if(!starRating) {
+            return new Response("Rating is required", {status: 400})
+        }
+
         if(!images || !images.length) {
             return new Response("Image is required", {status: 400})
         }
@@ -39,9 +48,6 @@ export async function POST (
             return new Response("Price Url is required", {status: 400})
         }
 
-        if(!inventory) {
-            return new Response("Inventory is required", {status: 400})
-        }
 
         if(!categoryId) {
             return new Response("Category Id is required", {status: 400})
@@ -74,10 +80,11 @@ export async function POST (
             data: {
                 name,
                 price,
-                inventory,
                 categoryId,
                 colorId,
                 sizeId,
+                description,
+                starRating,
                 isFeatured,
                 isArchived,
                 storeId: params.storeid,

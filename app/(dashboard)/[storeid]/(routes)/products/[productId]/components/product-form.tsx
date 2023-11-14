@@ -40,15 +40,17 @@ import {
     SelectValue 
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
     name: z.string().min(1),
     images: z.object({url: z.string()}).array(),
     price: z.coerce.number().min(1),
-    inventory: z.number().min(1),
+    starRating: z.string().min(1),
     categoryId: z.string().min(1),
     colorId: z.string().min(1),
     sizeId: z.string().min(1),
+    description: z.string().min(1),
     isFeatured: z.boolean().default(false).optional(),
     isArchived: z.boolean().default(false).optional(),
 });
@@ -93,7 +95,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             name: '',
             images: [],
             price: 0,
-            inventory: 10,
+            starRating: 0,
+            description: "",
             categoryId: '',
             colorId: '',
             sizeId: '',
@@ -212,19 +215,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                             </FormItem>
                         )}
                     />
-                    <FormField 
-                        control={form.control}
-                        name="inventory"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Inventory</FormLabel>
-                                <FormControl>
-                                    <Input type="number" disabled={loading} placeholder="0" {...field}/>
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                    
                     {/* Edit Categories */}
                     <FormField 
                         control={form.control}
@@ -333,6 +324,36 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                             </FormItem>
                         )}
                     />
+                    {/* Edit product's description */}
+                    <FormField 
+                        control={form.control}
+                        name="description"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Product's description</FormLabel>
+                                <FormControl>
+                                    {/* <Input disabled={loading} placeholder="Name label" {...field}/> */}
+                                    <Textarea disabled={loading} placeholder="Name label" {...field}/>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    {/* Edit prices */}
+                    <FormField 
+                        control={form.control}
+                        name="starRating"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Rating</FormLabel>
+                                <FormControl>
+                                    <Input type="number" disabled={loading} placeholder="Enter your rating for product" {...field}/>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    {/* Allow product to appear on store */}
                     <FormField 
                         control={form.control}
                         name="isFeatured"

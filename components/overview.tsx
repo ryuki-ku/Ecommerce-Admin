@@ -11,7 +11,8 @@ export const Overview: React.FC<OverviewProps> = ({
     data
   }) => {
     return (
-      <ResponsiveContainer width="100%" height='100%' >
+      // Using aspect not height because the barchart will not appear
+      <ResponsiveContainer width="100%"  aspect={5}> 
         <BarChart data={data} 
           margin={{
             top: 5,

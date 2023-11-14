@@ -30,6 +30,7 @@ const OrdersPage = async ({
         id: item.id,
         phone: item.phone,
         address: item.address,
+        name: item.name,
         isPaid: item.isPaid,
         products: item.orderItems.map((orderItem) => orderItem.product.name).join(', '),
         totalPrice: formatter.format(item.orderItems.reduce((total, item) => {

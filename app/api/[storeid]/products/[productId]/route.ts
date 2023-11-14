@@ -44,10 +44,11 @@ export async function PATCH (
             name,
             images,
             price,
-            inventory,
             categoryId,
             colorId,
             sizeId,
+            description,
+            starRating,
             isFeatured,
             isArchived,
          } = body;
@@ -60,16 +61,20 @@ export async function PATCH (
             return new Response("Name is required", {status: 400})
         }
 
+        if(!description) {
+            return new Response("Description is required", {status: 400})
+        }
+
+        if(!starRating) {
+            return new Response("Rating is required", {status: 400})
+        }
+
         if(!images || !images.length) {
             return new Response("Image is required", {status: 400})
         }
 
         if(!price) {
             return new Response("Price Url is required", {status: 400})
-        }
-
-        if(!inventory) {
-            return new Response("Inventory is required", {status: 400})
         }
 
         if(!categoryId) {
@@ -107,13 +112,14 @@ export async function PATCH (
             data: {
                 name,
                 price,
-                inventory,
                 categoryId,
                 colorId,
                 sizeId,
                 images: {
                     deleteMany: {}
                 },
+                description,
+                starRating,
                 isFeatured,
                 isArchived
             }

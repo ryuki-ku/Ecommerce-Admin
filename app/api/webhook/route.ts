@@ -43,6 +43,7 @@ export async function POST(req: Request) {
       },
       data: {
         isPaid: true,
+        name: session?.customer_details?.name || '',
         address: addressString,
         phone: session?.customer_details?.phone || '',
       },
