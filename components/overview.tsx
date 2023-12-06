@@ -16,9 +16,9 @@ export const Overview: React.FC<OverviewProps> = ({
         <BarChart data={data} 
           margin={{
             top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
+            right: 20,
+            left: 45,
+            bottom: 1,
           }}>
           <XAxis
             dataKey="name"
